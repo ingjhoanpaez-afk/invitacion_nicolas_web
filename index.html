@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación Nicolás - Mi Primer Añito</title>
+<style>
+body{margin:0;background:#eef4f5;font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh}
+.container{width:100%;max-width:430px;text-align:center}
+.screen{display:none}
+.screen.active{display:block}
+img,video{width:100%;height:auto;border-radius:12px}
+button,a.btn{display:inline-block;margin:10px;padding:14px 18px;border-radius:10px;background:#1e5eff;color:#fff;text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div id="sobre" class="screen active">
+  <img src="sobre.jpg" alt="Sobre">
+</div>
+
+<div id="video" class="screen">
+  <video id="videoInv" controls autoplay playsinline>
+    <source src="video.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div id="invitacion" class="screen">
+  <img src="invitacion.png" alt="Invitación">
+  <div>
+    <a class="btn" target="_blank" href="https://maps.google.com">📍 Ver ubicación</a>
+    <a class="btn" target="_blank" href="https://wa.me/">✅ Confirmar asistencia</a>
+  </div>
+</div>
+
+</div>
+
+<script>
+const sobre=document.getElementById('sobre');
+const video=document.getElementById('video');
+const invitacion=document.getElementById('invitacion');
+const videoInv=document.getElementById('videoInv');
+
+sobre.onclick=()=>{
+ sobre.classList.remove('active');
+ video.classList.add('active');
+ videoInv.play();
+};
+
+videoInv.onended=()=>{
+ video.classList.remove('active');
+ invitacion.classList.add('active');
+};
+</script>
+</body>
+</html>
