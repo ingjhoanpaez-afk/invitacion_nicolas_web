@@ -1,57 +1,221 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invitación Nicolás - Mi Primer Añito</title>
-<style>
-body{margin:0;background:#eef4f5;font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh}
-.container{width:100%;max-width:430px;text-align:center}
-.screen{display:none}
-.screen.active{display:block}
-img,video{width:100%;height:auto;border-radius:12px}
-button,a.btn{display:inline-block;margin:10px;padding:14px 18px;border-radius:10px;background:#1e5eff;color:#fff;text-decoration:none;font-weight:bold}
-</style>
-</head>
-<body>
-<div class="container">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="Invitación digital para el primer añito de Nicolás" />
+    <meta name="author" content="Nicolás" />
+    <meta name="keywords" content="invitación, cumpleaños, primer añito, Nicolás" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#87ceeb" />
+    <meta name="msapplication-navbutton-color" content="#87ceeb" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Nicolás" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="msapplication-starturl" content="/" />
 
-<div id="sobre" class="screen active">
-  <img src="sobre.jpg" alt="Sobre">
-</div>
+    <title>Invitación Nicolás - Mi Primer Añito</title>
 
-<div id="video" class="screen">
-  <video id="videoInv" controls autoplay playsinline>
-    <source src="video.mp4" type="video/mp4">
-  </video>
-</div>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="style.css" />
+    
+    <!-- Agregamos FontAwesome para los íconos de Google Maps y WhatsApp -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
-<div id="invitacion" class="screen">
-  <img src="invitacion.png" alt="Invitación">
-  <div>
-    <a class="btn" target="_blank" href="https://maps.google.com">📍 Ver ubicación</a>
-    <a class="btn" target="_blank" href="https://wa.me/">✅ Confirmar asistencia</a>
-  </div>
-</div>
+    <!-- Preconexión a Google Fonts para mejorar la carga de la fuente Sansita -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 
-</div>
+    <!-- Estilos CSS para la página -->
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(to bottom, #87ceeb, #fff59d);
+        background-attachment: fixed;
+        font-family: "Sansita", Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .container {
+        width: 100%;
+        max-width: 430px;
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      .screen {
+        display: none;
+      }
 
-<script>
-const sobre=document.getElementById('sobre');
-const video=document.getElementById('video');
-const invitacion=document.getElementById('invitacion');
-const videoInv=document.getElementById('videoInv');
+      /* Animación de aparición suave */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
 
-sobre.onclick=()=>{
- sobre.classList.remove('active');
- video.classList.add('active');
- videoInv.play();
-};
+      .screen.active {
+        display: block;
+        animation: fadeIn 0.6s ease-out forwards;
+      }
 
-videoInv.onended=()=>{
- video.classList.remove('active');
- invitacion.classList.add('active');
-};
-</script>
-</body>
+      /* Ajuste general para todas las imágenes y el video (para que encajen en cualquier pantalla) */
+      img,
+      video {
+        width: 100%;
+        height: auto;
+        max-height: 95vh; /* Límite de alto para la imagen inicial y el video */
+        object-fit: cover; /* Recorte inteligente */
+        object-position: center; /* Centrado por defecto */
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Ajuste para que las dos imágenes compartan el espacio y se vean los botones */
+      .imagen-compuesta {
+        display: flex;
+        flex-direction: column;
+        max-height: 85vh;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      .imagen-compuesta img {
+        width: 100%;
+        height: 42.5vh; /* Mitad de 85vh */
+        max-height: none; /* Sobrescribe el max-height global */
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .foto-mitad {
+        object-position: center;
+      }
+      .invitacion-mitad {
+        object-position: bottom;
+      }
+
+      /* Feedback visual al tocar el sobre */
+      #sobre {
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      #sobre:active {
+        transform: scale(0.95);
+      }
+
+      /* Enlaces adaptados (en la misma fila, sin subrayado) */
+      .botones-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      button,
+      a.btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px; /* Espacio entre el ícono y el texto */
+        background: #4d4a2f;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+        border: 2px solid #ffffff;
+        border-radius: 8px;
+        transition: background-color 0.3s, color 0.3s;
+        font-family: "Sansita", Arial, sans-serif;
+        padding: 10px;
+      }
+
+      button:hover,
+      a.btn:hover {
+        background-color: #ffffff;
+        color: #000000;
+      }
+
+      button:hover, a.btn:hover i {
+        color: #000000; /* Cambia el color del ícono al hacer hover */
+      }
+
+      a.btn > i {
+        font-size: 1.2em; /* Tamaño del ícono */
+        color: #ffffff; /* Color del ícono */
+      }
+
+      /* Colores originales para los íconos */
+      .fa-whatsapp {
+        color: #25d366;
+        font-size: 1.2em;
+      }
+      .fa-location-dot {
+        color: #ea4335;
+        font-size: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="sobre" class="screen active">
+        <img src="sobre.jpg" alt="Sobre" />
+      </div>
+
+      <div id="video" class="screen">
+        <video id="videoInv" controls playsinline>
+          <source src="video.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div id="invitacion" class="screen">
+        <div class="imagen-compuesta">
+          <img src="foto.jpg" alt="Foto de Nicolás" class="foto-mitad" />
+          <img src="invitacion.png" alt="Invitación" class="invitacion-mitad" />
+        </div>
+        <div class="botones-container">
+          <a class="btn" target="_blank" href="https://maps.app.goo.gl/V57FEkN1oDtLryBt5"
+            ><i class="fa-solid fa-location-dot"></i> Ver ubicación</a
+          >
+          <a class="btn" target="_blank" href="https://wa.me/573219194127?text=🎉 ¡Hola! 👋%0A%0A💛 Con mucho gusto confirmo mi asistencia al primer añito de Nicolás 👑🎂.%0A%0A✨ ¡Será un placer acompañarlos en esta fecha tan especial!"
+            ><i class="fa-brands fa-whatsapp"></i> Confirmar asistencia</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const sobre = document.getElementById("sobre");
+      const video = document.getElementById("video");
+      const invitacion = document.getElementById("invitacion");
+      const videoInv = document.getElementById("videoInv");
+
+      sobre.onclick = () => {
+        sobre.classList.remove("active");
+        video.classList.add("active");
+        videoInv.play();
+      };
+
+      videoInv.onended = () => {
+        video.classList.remove("active");
+        invitacion.classList.add("active");
+      };
+    </script>
+  </body>
 </html>
